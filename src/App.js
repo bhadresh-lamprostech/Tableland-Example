@@ -18,7 +18,7 @@ function App() {
 
   const create_creators_question_table = async () => {
     const { name } = await tableObject.create(
-      `creators_question_id integer primary key, creators_id integer, question text, option1 text, option2 text, option3 text, option4 text, option5 text, answer text, solution text, added_at int, difficulty_level text, repo_name text, privacy int`, // Table schema definition
+      `creators_question_id integer primary key, creators_id integer, question text, option1 text, option2 text, option3 text, option4 text, option5 text, answer text, solution text, primary_tag text, secondary_tags text, nation_list text, added_at int, difficulty_level text, repo_name text, privacy int`, // Table schema definition
       {
         prefix: `creators_question_table`, // Optional `prefix` used to define a human-readable string
       }
@@ -69,13 +69,16 @@ function App() {
     option5,
     answer,
     solution,
+    primary_tag,
+    secondary_tags,
+    nation_list,
     added_at,
     difficulty_level,
     repo_name,
     privacy
   ) => {
     const writeRes = await tableObject.write(
-      `INSERT INTO ${tablename} (creators_id,question,option1,option2,option3,option4,option5,answer,solution,added_at,difficulty_level,repo_name,privacy) VALUES (${creators_id},${question},${option1},${option2},${option3},${option4},${option5},${answer},${solution},${added_at},${difficulty_level},${repo_name},${privacy});`
+      `INSERT INTO ${tablename} (creators_id,question,option1,option2,option3,option4,option5,answer,solution,primary_tag,secondary_tags,nation_list,added_at,difficulty_level,repo_name,privacy) VALUES (${creators_id},${question},${option1},${option2},${option3},${option4},${option5},${answer},${solution},${added_at},${difficulty_level},${repo_name},${privacy});`
     );
     console.log(writeRes);
   };
@@ -114,7 +117,7 @@ function App() {
 
   const view_creators_questions_table = async () => {
     const readRes = await tableObject.read(
-      `SELECT * FROM creators_question_table_80001_1783;`
+      `SELECT * FROM creators_question_table_80001_2089;`
     );
     console.log(readRes);
   };
